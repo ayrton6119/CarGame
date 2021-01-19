@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 
-    [SerializeField] float health = 50f;
+    [SerializeField] int health = 50;
 
     [SerializeField] float moveSpeed = 10f;
     [SerializeField] float moveSpeedy = 0;
@@ -22,6 +22,11 @@ public class Player : MonoBehaviour
     void Update()
     {
         Move();
+    }
+
+    public int GetHealth()
+    {
+        return health;
     }
 
     private void OnTriggerEnter2D(Collider2D otherObject)
