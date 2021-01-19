@@ -16,6 +16,8 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] float enemyLaserSpeed = 0.3f;
 
+    [SerializeField] int scoreValue = 50;
+
     private void OnTriggerEnter2D(Collider2D otherObject)
     {
         DamageDealer dmgDealer = otherObject.gameObject.GetComponent<DamageDealer>();
@@ -29,8 +31,14 @@ public class Enemy : MonoBehaviour
 
         if (health <= 0)
         {
-            Destroy(gameObject);
+            Die();
         }
+    }
+
+    private void Die()
+    {
+        Destroy(gameObject);
+        FindObjectOfType<GameSession>().AddToScore(scoreValue);
     }
 
     void Start()
