@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 
-    float test = 5f;
+    [SerializeField] float health = 50f;
 
     [SerializeField] float moveSpeed = 10f;
     [SerializeField] float moveSpeedy = 0;
@@ -22,6 +22,23 @@ public class Player : MonoBehaviour
     void Update()
     {
         Move();
+    }
+
+    private void OnTriggerEnter2D(Collider2D otherObject)
+    {
+        DamageDealer dmgDealer = otherObject.gameObject.GetComponent<DamageDealer>();
+
+        ProcessHit(dmgDealer);
+    }
+
+    private void ProcessHit(DamageDealer dmgDealer)
+    {
+        health -= dmgDealer.GetDamage();
+
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void SetUpMoveBoundaries()
